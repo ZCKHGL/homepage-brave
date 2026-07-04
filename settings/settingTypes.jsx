@@ -357,7 +357,7 @@ export class Theme {
       query: '#0d8a8a',
       suggestions: '#0d7a9e',
       background: '#ffffff',
-      time: '#e44ced',
+      time: '#0d8a8a',
       card: '#f0f5ff',
       prefix: '#d64ce4',
       visited: '#9b30a0'
@@ -370,7 +370,7 @@ export class Theme {
       query: '#39c5bb',
       suggestions: '#7fdbff',
       background: '#0a0e1e',
-      time: '#ff69b4',
+      time: '#39c5bb',
       card: '#151d3a',
       prefix: '#e44ced',
       visited: '#b44ccd'
