@@ -112,7 +112,7 @@ function MacrosMenu({ visibility, fullVisibility }) {
                   icon={pm.icon}
                   bgColor={pm.bgColor}
                   textColor={pm.textColor}
-                  hotKey={pm.key && pm.key.slice(-1)}
+                  hotKey={(pm.key && pm.key.slice(-1)) || (pm.name && pm.name.charAt(0).toUpperCase())}
                   isHintActive={true}
                   onClick={() => activateCard(pm)}/>
               </SplideSlide>
