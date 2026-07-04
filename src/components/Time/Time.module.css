@@ -1,0 +1,4 @@
+.time {
+  color: var(--time);
+  font-size: var(--font-size);
+}
