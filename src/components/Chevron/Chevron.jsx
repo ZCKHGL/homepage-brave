@@ -283,7 +283,7 @@ function Chevron({ visibility, onAnimationEnd }) {
             }}
           />
           <motion.img 
-            src="/miku.png" 
+            src="./miku.png" 
             className={classes['miku-img']}
             initial={{ x: "-50%", y: "-50%", scale: 1, opacity: 1 }}
             animate={controls.miku}
