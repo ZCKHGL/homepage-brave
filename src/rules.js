@@ -15,7 +15,8 @@ const activeKeys = new Map([
 const allowedModes = new Map([
   ['QueryField', new Set([
     'default', 
-    'searching'
+    'searching',
+    'opened'
   ])],
   ['Chevron', new Set([
     'default',

@@ -350,30 +350,30 @@ export class Theme {
   ]
   static defaultColors = {
     light: {
-      primary: '#0d8a8a',
+      primary: '#2dcac9',
       secondary: '#f5f5fa',
-      accent: '#d64ce4',
-      chevron: '#e44ced',
-      query: '#0d8a8a',
-      suggestions: '#0d7a9e',
-      background: '#ffffff',
-      time: '#0d8a8a',
+      accent: '#fe008a',
+      chevron: '#fe008a',
+      query: '#2dcac9',
+      suggestions: '#2dcac9',
+      background: '#fe008a',
+      time: '#fe008a',
       card: '#f0f5ff',
-      prefix: '#d64ce4',
-      visited: '#9b30a0'
+      prefix: '#fe008a',
+      visited: '#cc0070'
     },
     dark: {
-      primary: '#00e5ff',
+      primary: '#2dcac9',
       secondary: '#101530',
-      accent: '#e44ced',
-      chevron: '#ff69b4',
-      query: '#39c5bb',
-      suggestions: '#7fdbff',
-      background: '#0a0e1e',
-      time: '#39c5bb',
-      card: '#151d3a',
-      prefix: '#e44ced',
-      visited: '#b44ccd'
+      accent: '#fe008a',
+      chevron: '#fe008a',
+      query: '#2dcac9',
+      suggestions: '#2dcac9',
+      background: '#fe008a',
+      time: '#fe008a',
+      card: '#1a1a2e',
+      prefix: '#fe008a',
+      visited: '#cc0070'
     }
   }
 

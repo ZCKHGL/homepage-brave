@@ -34,7 +34,7 @@ function QuickLook ({ visibility, onAnimationEnd }) {
   
   const duration = settings.general.animationSpeed / 1000
   const thickness = settings.chevron.thickness
-  const color = theme.chevron
+  const color = '#2dcac9'
   const topCurvature = settings.chevron.quickLook.topCurvature
   const bottomCurvature = settings.chevron.quickLook.bottomCurvature
   const showMacrosLabel = settings.chevron.quickLook.showMacrosLabel

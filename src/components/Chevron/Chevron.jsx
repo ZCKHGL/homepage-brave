@@ -39,7 +39,10 @@ function Chevron({ visibility, onAnimationEnd }) {
         ballControls = useAnimationControls(),
         lineControls = useAnimationControls(),
         topMenuControls = useAnimationControls(),
-        bottomMenuControls = useAnimationControls()
+        bottomMenuControls = useAnimationControls(),
+        // New controls for 01 icon, and teal background
+        icon01Controls = useAnimationControls(),
+        tealBgControls = useAnimationControls()
         
   const controls = useMemo(() => {
     return ({
@@ -47,9 +50,11 @@ function Chevron({ visibility, onAnimationEnd }) {
       ball: ballControls, 
       line: lineControls,
       topMenu: topMenuControls, 
-      bottomMenu: bottomMenuControls
+      bottomMenu: bottomMenuControls,
+      icon01: icon01Controls,
+      tealBg: tealBgControls
     })
-  }, [mikuControls, ballControls, lineControls, topMenuControls, bottomMenuControls])
+  }, [mikuControls, ballControls, lineControls, topMenuControls, bottomMenuControls, icon01Controls, tealBgControls])
 
   const animations = useMemo(() => {
     return ({
@@ -58,16 +63,16 @@ function Chevron({ visibility, onAnimationEnd }) {
           // Returning from QuickLook to Default
           async searching() {
             // Ensure ball starts pink
-            controls.ball.set({ backgroundColor: theme.accent })
+            controls.ball.set({ backgroundColor: '#fe008a' })
 
-            // Start color shift slowly (1 second)
+            // Start color shift to green
             controls.ball.start({
-              backgroundColor: theme.time,
+              backgroundColor: '#39ff39',
               transition: { duration: duration * 1 }
             })
 
-            // Ball comes back from left side
-            await controls.ball.start({
+            // Ball and teal bg come back from left side together
+            controls.ball.start({
               left: '50%',
               scale: 1,
               opacity: 1,
@@ -77,12 +82,24 @@ function Chevron({ visibility, onAnimationEnd }) {
               }
             })
             
-            if (mode !== modeRef.current) return
+            // Teal bg expands back to rectangle synced with ball
+            await controls.tealBg.start({
+              width: '33vw',
+              left: '33.5vw',
+              opacity: 1,
+              transition: { ease: easeOutQuad, duration: duration * timings.smashToSide[0] }
+            })
             
-            // Ball shrinks and Miku appears
+            // Ball shrinks and Miku + 01 appear
             controls.ball.start({
               scale: 0,
               opacity: 0,
+              transition: { duration: duration * timings.ball[0] }
+            })
+            controls.icon01.start({
+              opacity: 1,
+              scale: 1,
+              top: '62%',
               transition: { duration: duration * timings.ball[0] }
             })
             await controls.miku.start({
@@ -119,6 +136,18 @@ function Chevron({ visibility, onAnimationEnd }) {
               }
             })
             if (mode !== modeRef.current) return 
+
+            // Teal bg shrinks back from fullscreen to rectangle
+            await controls.tealBg.start({
+              width: '33vw',
+              height: '100vh',
+              left: '33.5vw',
+              top: '0',
+              borderRadius: 0,
+              transition: { ease: easeInOutQuad, duration: duration * timings.menu[2] }
+            })
+
+            if (mode !== modeRef.current) return
             
             // Ball bounce down to line (50%)
             await controls.ball.start({
@@ -128,7 +157,7 @@ function Chevron({ visibility, onAnimationEnd }) {
             
             if (mode !== modeRef.current) return
 
-            // Pop up slightly to morph back into Miku
+            // Pop up slightly to morph back into Miku + 01
             await controls.ball.start({
               top: '40%',
               transition: { ease: easeOutCubic, duration: duration * timings.ball[2] }
@@ -136,12 +165,18 @@ function Chevron({ visibility, onAnimationEnd }) {
             
             if (mode !== modeRef.current) return
 
-            // Shrink ball to dot and show Miku
+            // Shrink ball and show Miku + 01
             controls.ball.start({
               scale: 0,
               opacity: 0,
               top: '50%',
               transition: { ease: easeInBack, duration: duration * timings.ball[0] }
+            })
+            controls.icon01.start({
+              scale: 1,
+              opacity: 1,
+              top: '62%',
+              transition: { ease: easeOutElastic, duration: duration * timings.ball[0] }
             })
             return await controls.miku.start({
               scale: 1,
@@ -153,13 +188,19 @@ function Chevron({ visibility, onAnimationEnd }) {
         searching: {
           // Going to Search from Default
           async default() {
-            // Ensure ball starts with time color
-            controls.ball.set({ backgroundColor: theme.time })
+            // Ensure ball starts with green color
+            controls.ball.set({ backgroundColor: '#39ff39' })
 
-            // Miku to ball
+            // Miku + 01 to balls
             controls.miku.start({
               scale: 0,
               opacity: 0,
+              transition: { duration: duration * timings.ball[0] }
+            })
+            controls.icon01.start({
+              scale: 0,
+              opacity: 0,
+              top: '50%',
               transition: { duration: duration * timings.ball[0] }
             })
             await controls.ball.start({
@@ -171,10 +212,21 @@ function Chevron({ visibility, onAnimationEnd }) {
             
             if (mode !== modeRef.current) return
 
-            // Ball moves to left side and shifts to pink
+            // Teal bg slides left and shrinks
+            controls.tealBg.start({
+              width: '0vw',
+              left: '0',
+              opacity: 0,
+              transition: {
+                ease: easeInQuad,
+                duration: duration * timings.smashToSide[0]
+              }
+            })
+
+            // Ball move to left side and shift to pink
             await controls.ball.start({
               left: 0,
-              backgroundColor: theme.accent,
+              backgroundColor: '#fe008a',
               transition: {
                 ease: easeInQuad,
                 duration: duration * timings.smashToSide[0]
@@ -191,13 +243,19 @@ function Chevron({ visibility, onAnimationEnd }) {
         opened: {
           // Going to Menu from Default
           async default() {
-            // Reset color
-            controls.ball.set({ backgroundColor: theme.time })
+            // Reset colors - green ball
+            controls.ball.set({ backgroundColor: '#39ff39' })
             
-            // 1. Dot spawn & Miku hide (Spawns slightly higher than center so it can fall)
+            // 1. Dot spawn & Miku + 01 hide
             controls.miku.start({
               scale: 0,
               opacity: 0,
+              transition: { ease: easeInBack, duration: duration * timings.ball[0] }
+            })
+            controls.icon01.start({
+              scale: 0,
+              opacity: 0,
+              top: '50%',
               transition: { ease: easeInBack, duration: duration * timings.ball[0] }
             })
             await controls.ball.start({
@@ -209,7 +267,22 @@ function Chevron({ visibility, onAnimationEnd }) {
 
             if (mode !== modeRef.current) return
 
-            // 2. Line appears & Ball bounce down to line (50%)
+            // 2. Teal bg expands to fullscreen + ball color shifts green → pink
+            controls.tealBg.start({
+              width: '100vw',
+              height: '100vh',
+              left: '0',
+              top: '0',
+              opacity: 1,
+              borderRadius: 0,
+              transition: { ease: easeInOutQuad, duration: duration * timings.menu[1] }
+            })
+            controls.ball.start({
+              backgroundColor: '#fe008a',
+              transition: { duration: duration * timings.menu[1] }
+            })
+
+            // Line appears & Ball bounces
             controls.line.start({
               scaleX: 1,
               opacity: 1,
@@ -222,15 +295,15 @@ function Chevron({ visibility, onAnimationEnd }) {
 
             if (mode !== modeRef.current) return
 
-            // 3. Ball bounce up to clock position
+            // 3. Ball bounces up to clock position
             await controls.ball.start({
-              top: '35%',
+              top: '42%',
               transition: { ease: easeOutCubic, duration: duration * timings.ball[2] }
             })
 
             if (mode !== modeRef.current) return
 
-            // 4. Ball morph to clock (shrink out, Time component fades in)
+            // 4. Ball morph to clock (shrink out)
             await controls.ball.start({
               scale: 0,
               opacity: 0,
@@ -264,6 +337,14 @@ function Chevron({ visibility, onAnimationEnd }) {
           '--menu-offset': thickness/2 + 'px',
           visibility: visibility ? 'visible' : 'hidden'
         }}>
+
+        {/* Teal background overlay */}
+        <motion.div
+          className={classes['teal-bg']}
+          initial={{ width: '33vw', height: '100vh', left: '33.5vw', top: '0', opacity: 1, borderRadius: 0 }}
+          animate={controls.tealBg}
+        />
+
         <div className={classes['wrapper']}>
             <motion.div 
               initial={{ translateY: '100%'}}
@@ -278,7 +359,7 @@ function Chevron({ visibility, onAnimationEnd }) {
             initial={{ scaleX: 0, opacity: 0 }}
             animate={controls.line}
             style={{ 
-              backgroundColor: theme.chevron,
+              backgroundColor: '#fe008a',
               height: thickness + 'px',
             }}
           />
@@ -289,10 +370,18 @@ function Chevron({ visibility, onAnimationEnd }) {
             animate={controls.miku}
             alt="Miku"
           />
+          {/* 01 Icon */}
+          <motion.img
+            src="./01r.png"
+            className={classes['icon-01']}
+            initial={{ x: "-50%", scale: 1, opacity: 1 }}
+            animate={controls.icon01}
+            alt="01"
+          />
           <MikuBall 
             controls={controls.ball}
             initial={{ x: "-50%", y: "-50%", scale: 0, opacity: 0, left: '50%', top: '50%' }}
-            color={theme.time}
+            color={'#39ff39'}
           />
         </div>
 

@@ -24,7 +24,7 @@ const template = {
      * locale parameter is used by autocomplete engine and other components 
      */
     locale: new types.Input('en', '[language]-[COUNTRY]'),
-    tabTitle: new types.Input('Chevron'),
+    tabTitle: new types.Input('WELCOME!'),
     // hidden
     redirectTarget: new types.Switch('_self', ['_self', '_blank'])
   },

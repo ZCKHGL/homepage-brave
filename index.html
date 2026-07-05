@@ -9,7 +9,7 @@
     <!-- coloration -->
     <script>
       // Auto-clear old theme settings when theme version changes
-      const THEME_VERSION = 'miku-v3'
+      const THEME_VERSION = 'miku-v4'
       if (localStorage.getItem('themeVersion') !== THEME_VERSION) {
         localStorage.removeItem('settings')
         localStorage.setItem('themeVersion', THEME_VERSION)
@@ -23,7 +23,7 @@
             : 'light'
           : settings.appearance.colorScheme
   
-        document.documentElement.style.backgroundColor = settings.appearance.themes[settings.appearance.activeTheme][colorScheme].background
+        document.documentElement.style.backgroundColor = '#fe008a'
       }
     </script>
     <!-- -->

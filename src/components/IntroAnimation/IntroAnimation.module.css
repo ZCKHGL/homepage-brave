@@ -1,0 +1,45 @@
+.intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fe008a;
+}
+
+.dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2dcac9;
+}
+
+.teal-rect {
+  position: absolute;
+  background: #2dcac9;
+  width: 0;
+  height: 0;
+  border-radius: 4px;
+}
+
+.miku-intro {
+  position: absolute;
+  max-height: 50vh;
+  max-width: 50vw;
+  object-fit: contain;
+  z-index: 2;
+}
+
+.icon-01 {
+  position: absolute;
+  max-height: 18vh;
+  max-width: 18vw;
+  object-fit: contain;
+  z-index: 2;
+}

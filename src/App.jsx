@@ -3,6 +3,7 @@ import { ColorSchemeContext, SettingsContext, ThemeContext } from './contexts/Se
 import { useReset, useStateSelector, useUpdate } from './contexts/Store'
 import { AnimatePresence, motion} from 'framer-motion'
 import ActiveElements from './components/ActiveElements/ActiveElements'
+import IntroAnimation from './components/IntroAnimation/IntroAnimation'
 import QueryField from './components/QueryField/QueryField'
 import Settings from './components/Settings/Settings'
 import LayoutButton from './components/LayoutButton/LayoutButton'
@@ -33,6 +34,7 @@ function App() {
 
   const [showSettings, setShowSettings] = useState(false)
   const [showReset, setShowReset] = useState(false)
+  const [introComplete, setIntroComplete] = useState(false)
 
   /* handlers */
   const onContextMenuRef = useRef(null)
@@ -122,6 +124,7 @@ function App() {
 
   return (
     <div className='app'>
+      {!introComplete && <IntroAnimation onComplete={() => setIntroComplete(true)} />}
       {
         !isMobile || ignoreMobile
           ? <AnimatePresence>

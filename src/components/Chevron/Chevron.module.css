@@ -14,9 +14,9 @@
   font-size: 5em;
   padding: 0 15%;
   overflow: hidden;
-  z-index: 1;
+  z-index: 3;
 }
-.wrapper:first-child {
+.wrapper:nth-child(2) {
   align-items: end;
 }
 .wrapper:last-child {
@@ -25,6 +25,13 @@
 .wrapper > * {
   width: 100%;
   text-align: center;
+}
+
+.teal-bg {
+  position: absolute;
+  background: #2dcac9;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .miku-container {
@@ -44,6 +51,16 @@
   transform: translate(-50%, -50%);
   max-height: 50vh;
   max-width: 50vw;
+  object-fit: contain;
+}
+
+.icon-01 {
+  position: absolute;
+  top: 62%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-height: 18vh;
+  max-width: 18vw;
   object-fit: contain;
 }
 

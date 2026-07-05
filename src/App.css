@@ -1,16 +1,16 @@
 .app {
-  background: var(--background);
+  background: #fe008a;
   color: var(--primary);
   width: 100vw;
   height: 100vh;
   overflow: hidden;
 }
-/* Miku gradient backgrounds */
+/* Miku pink background - flat color */
 body[data-color-scheme=dark] .app {
-  background: linear-gradient(135deg, #0a0e1e 0%, #101540 40%, #0d1a3a 70%, #0a1028 100%);
+  background: #fe008a;
 }
 body[data-color-scheme=light] .app {
-  background: linear-gradient(135deg, #daf0f7 0%, #e0e8f8 50%, #e8dff5 100%);
+  background: #fe008a;
 }
 .app * {
   /* cursor: default; */
